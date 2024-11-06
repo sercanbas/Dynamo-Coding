@@ -1,0 +1,35 @@
+^^Printable Wall ID from The Point^^
+
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# The inputs to this node will be stored as a list in the IN variables.
+dataEnteringNode = IN[0]
+okeylist = []
+# Place your code below this line
+for k in range(len(dataEnteringNode)):
+    truelist = []
+    for l in range(len(dataEnteringNode[k])):
+        count = 0
+        for m in range(len(dataEnteringNode[k][l])):
+            n = dataEnteringNode[k][l][m]
+            size = len(dataEnteringNode[k][l])
+            
+            if n <= 360:
+                dataEnteringNode[k][l][m] = "True"
+            else:
+                dataEnteringNode[k][l][m] = "False"
+            
+            if     dataEnteringNode[k][l][m] == "True":
+                count+=1            
+        if count == size:
+            truelist.append(l)
+    if len(truelist) > 0:
+        okeylist.append(truelist)
+    else:
+        okeylist.append(["-"])
+
+
+OUT = okeylist
