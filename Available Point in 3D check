@@ -1,0 +1,18 @@
+^^Available Point in 3D Check^^
+
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# The inputs to this node will be stored as a list in the IN variables.
+dataEnteringNode1 = IN[0]
+dataEnteringNode2 = IN[1]
+# Place your code below this line
+dataEnteringNode2.sort(reverse=True)
+
+for i in range(len(dataEnteringNode2)):
+    j = dataEnteringNode2[i]
+    dataEnteringNode1.pop(j)
+# Assign your output to the OUT variable.
+OUT = dataEnteringNode1
