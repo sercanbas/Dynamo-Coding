@@ -1,0 +1,21 @@
+^^Printable Wall ID in Points(True/False)^^ Dynamo Code
+
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# The inputs to this node will be stored as a list in the IN variables.
+dataEnteringNode = IN[0]
+okeylist = []
+# Place your code below this line
+for k in range(len(dataEnteringNode)):
+    for l in range(len(dataEnteringNode[k])):
+        for m in range(len(dataEnteringNode[k][l])):
+            n = dataEnteringNode[k][l][m]
+            
+            if n <= 360:
+                dataEnteringNode[k][l][m] = "True"
+            else:
+                dataEnteringNode[k][l][m] = "False"    
+OUT = dataEnteringNode
