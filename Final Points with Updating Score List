@@ -1,1 +1,44 @@
 ^^Final Points w/Updating Score List^^
+
+import sys
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# The inputs to this node will be stored as a list in the IN variables.
+WallList = IN[0]
+ScoreList = IN[1]
+PrintableList = IN[2]
+FinalPoints =[]
+tempNewScore = []
+# Place your code below this line
+#while len(ScoreList) != 0:
+DeleteList = []
+x = 0
+while len(WallList) != 0:
+    NewScoreList = []
+    x = x+1
+    if x == 1000:
+        break
+    k = ScoreList[0][1]
+    for i in range(len(PrintableList[k])):
+        DeleteList.append(PrintableList[k][i])
+        for value in DeleteList:
+            if value in WallList:
+                WallList.remove(value)
+    FinalPoints.append(k)        
+    for j in range(len(PrintableList)):
+        count = 0
+        for l in range(len(PrintableList[j])):
+            if PrintableList[j][l] in WallList:
+                count+=1
+            else:
+                continue
+        NewScoreList.append([count,j])
+        NewScoreList.sort(reverse=True)
+    tempNewScore.append(NewScoreList[0])
+    ScoreList = NewScoreList
+    
+# Assign your output to the OUT variable.
+OUT = FinalPoints
+
